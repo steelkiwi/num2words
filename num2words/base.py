@@ -116,8 +116,7 @@ class Num2Word_Base(object):
 
         pre = int(value)
         post = str(abs(value - pre) * 10**self.precision)
-        while len(post.split('.')[0]) < self.precision:
-            post = '0' + post
+        post = '0' * (self.precision - len(post.split('.')[0])) + post
 
         out = [self.to_cardinal(pre)]
         if self.precision:

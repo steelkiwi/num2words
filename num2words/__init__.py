@@ -52,7 +52,7 @@ CONVERTER_CLASSES = {
     'pt_BR': lang_PT_BR.Num2Word_PT_BR(),
 }
 
-def num2words(number, ordinal=False, lang='en'):
+def num2words(number, ordinal=False, lang='en', currency=None, cents=True, separator=','):
     # We try the full language first
     if lang not in CONVERTER_CLASSES:
         # ... and then try only the first 2 letters
@@ -62,5 +62,7 @@ def num2words(number, ordinal=False, lang='en'):
     converter = CONVERTER_CLASSES[lang]
     if ordinal:
         return converter.to_ordinal(number)
+    elif currency:
+        return converter.to_currency(number, currency=currency, cents=cents, seperator=separator)
     else:
         return converter.to_cardinal(number)

@@ -19,10 +19,23 @@ from .lang_EN import Num2Word_EN
 
 
 class Num2Word_EN_UA(Num2Word_EN):
+
+    def merge(self, (ltext, lnum), (rtext, rnum)):
+        if lnum == 1 and rnum < 100:
+            return (rtext, rnum)
+        elif 100 > lnum > rnum :
+            return ("%s-%s"%(ltext, rtext), lnum + rnum)
+        elif lnum >= 100 > rnum:
+            return ("%s %s"%(ltext, rtext), lnum + rnum)
+        elif rnum > lnum:
+            return ("%s %s"%(ltext, rtext), lnum * rnum)
+        return ("%s, %s"%(ltext, rtext), lnum + rnum)
+
     def to_currency(self, val, longval=True, **kwargs):
         jointxt = kwargs.get('seperator', 'and')
+        cents = kwargs.get('cents', True)
         return self.to_splitnum(val, hightxt="dollar/s", lowtxt="cent/s",
-                                jointxt=jointxt, longval=longval)
+                                jointxt=jointxt, longval=longval, cents=cents)
 
 
 n2w = Num2Word_EN_UA()

@@ -20,8 +20,9 @@ from .lang_EN import Num2Word_EN
 
 class Num2Word_EN_UA(Num2Word_EN):
     def to_currency(self, val, longval=True, **kwargs):
+        jointxt = kwargs.get('seperator', 'and')
         return self.to_splitnum(val, hightxt="dollar/s", lowtxt="cent/s",
-                                jointxt="and", longval=longval)
+                                jointxt=jointxt, longval=longval)
 
 
 n2w = Num2Word_EN_UA()

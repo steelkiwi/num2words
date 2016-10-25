@@ -27,11 +27,12 @@ from . import lang_LT
 from . import lang_LV
 from . import lang_PL
 from . import lang_RU
-from . import lang_UA
 from . import lang_ID
 from . import lang_NO
 from . import lang_DK
 from . import lang_PT_BR
+from . import lang_UA
+from . import lang_EN_UA
 
 CONVERTER_CLASSES = {
     'en': lang_EN.Num2Word_EN(),
@@ -47,12 +48,13 @@ CONVERTER_CLASSES = {
     'pl': lang_PL.Num2Word_PL(),
     'ru': lang_RU.Num2Word_RU(),
     'ua': lang_UA.Num2Word_UA(),
+    'en_ua': lang_EN_UA.Num2Word_EN_UA(),
     'no': lang_NO.Num2Word_NO(),
     'dk': lang_DK.Num2Word_DK(),
     'pt_BR': lang_PT_BR.Num2Word_PT_BR(),
 }
 
-def num2words(number, ordinal=False, lang='en', currency=None, cents=True, separator=','):
+def num2words(number, ordinal=False, lang='en', longval=None, currency=None, cents=True, separator=','):
     # We try the full language first
     if lang not in CONVERTER_CLASSES:
         # ... and then try only the first 2 letters
@@ -62,7 +64,7 @@ def num2words(number, ordinal=False, lang='en', currency=None, cents=True, separ
     converter = CONVERTER_CLASSES[lang]
     if ordinal:
         return converter.to_ordinal(number)
-    elif currency:
-        return converter.to_currency(number, currency=currency, cents=cents, seperator=separator)
+    elif currency is not None and longval is not None:
+        return converter.to_currency(number, longval=longval, currency=currency, cents=cents, seperator=separator)
     else:
         return converter.to_cardinal(number)

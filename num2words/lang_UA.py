@@ -313,7 +313,7 @@ class Num2Word_UA(object):
     def to_ordinal(self, number):
         raise NotImplementedError()
 
-    def to_currency(self, number, currency='USD', cents=True, seperator=','):
+    def to_currency(self, number, longval=True, currency='USD', cents=True, seperator=','):
         return to_currency(number, currency=currency, cents=cents, seperator=seperator)
 
 

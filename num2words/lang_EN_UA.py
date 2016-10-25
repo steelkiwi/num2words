@@ -38,6 +38,7 @@ class Num2Word_EN_UA(Num2Word_EN):
                     if jointxt:
                         out.append(self.title(jointxt))
             elif hightxt:
+                out.append('United State')
                 out.append(hightxt)
         if cents:
             out.append(self.to_cardinal(low))

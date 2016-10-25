@@ -33,6 +33,7 @@ class Num2Word_EN_UA(Num2Word_EN):
             if low:
                 if longval:
                     if hightxt:
+                        out.append('United State')
                         out.append(hightxt)
                     if jointxt:
                         out.append(self.title(jointxt))

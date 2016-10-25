@@ -30,15 +30,18 @@ class Num2Word_EN_UA(Num2Word_EN):
         if high:
             hightxt = self.title(self.inflect(high, hightxt))
             out.append(self.to_cardinal(high))
-            if longval:
-                if hightxt:
-                    out.append('United State')
-                    out.append(hightxt)
-                if jointxt:
-                    out.append(self.title(jointxt))
+            if low:
+                if longval:
+                    if hightxt:
+                        out.append('United State')
+                        out.append(hightxt)
+                    if jointxt:
+                        out.append(self.title(jointxt))
             elif hightxt:
                 out.append('United State')
                 out.append(hightxt)
+                if jointxt:
+                    out.append(self.title(jointxt))
         if cents:
             out.append(self.to_cardinal(low))
         else:
